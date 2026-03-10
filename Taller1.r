@@ -113,6 +113,33 @@ ggplot(datos, aes(x = week, y = visits)) +
     x = "Week",
     y = "Visits"
   )
+# Marcar campaña
+ggplot(datos, aes(x = week, y = visits)) +
+  geom_line() +
+  geom_vline(xintercept = 30, linetype = "dashed") +
+  labs(
+    title = "Impact of Marketing Campaign on Website Visits",
+    x = "Week",
+    y = "Visits"
+  )
 
+# Dividir antes y después
+antes <- datos[datos$week < 30, ]
+despues <- datos[datos$week >= 30, ]
+
+# Promedio de visitas
+mean(antes$visits)
+mean(despues$visits)
+
+# Comparación visual
+datos$periodo <- ifelse(datos$week < 30, "Antes", "Despues")
+
+ggplot(datos, aes(x = periodo, y = visits)) +
+  geom_boxplot() +
+  labs(
+    title = "Visits Before vs After Marketing Campaign",
+    x = "Periodo",
+    y = "Visitas"
+  )
 
 
