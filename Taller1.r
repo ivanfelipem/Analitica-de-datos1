@@ -59,3 +59,33 @@ ggplot(datos, aes(x = week, y = visits)) +
     y = "Number of Visits"
   )
 datos$week <- 1:nrow(datos)
+ggplot(datos, aes(x = week, y = visits)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Website Visits Over Time",
+    x = "Week",
+    y = "Number of Visits"
+  )
+ggplot(datos, aes(x = week, y = visits)) +
+  geom_line() +
+  geom_vline(xintercept = 30, linetype = "dashed", color = "red") +
+  labs(
+    title = "Website Visits Over Time",
+    x = "Week",
+    y = "Number of Visits"
+  )
+antes <- datos[datos$week < 30, ]
+despues <- datos[datos$week >= 30, ]
+
+mean(antes$visits)
+mean(despues$visits)
+datos$periodo <- ifelse(datos$week < 30, "Antes", "Despues")
+
+ggplot(datos, aes(x = periodo, y = visits)) +
+  geom_boxplot() +
+  labs(
+    title = "Visits Before vs After Brochure Campaign",
+    x = "Period",
+    y = "Visits"
+  )
