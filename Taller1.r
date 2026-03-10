@@ -50,3 +50,12 @@ ggplot(datos, aes(x = pages_per_visit, y = time_on_site)) +
     x = "Pages per Visit",
     y = "Time on Site"
   )
+ggplot(datos, aes(x = week, y = visits)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Website Visits Over Time",
+    x = "Week",
+    y = "Number of Visits"
+  )
+datos$week <- 1:nrow(datos)
